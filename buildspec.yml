@@ -7,11 +7,6 @@ phases:
     runtime-versions:
       java: corretto17
 
-    commands:
-      - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-      - apt-get update -y
-      - apt-get install -y maven
-
   build:
     commands:
       - mvn clean
