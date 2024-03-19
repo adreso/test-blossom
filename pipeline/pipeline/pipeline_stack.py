@@ -47,6 +47,8 @@ class PipelineStack(Stack):
             code_pipeline=code_pipeline,
         )
 
-        pipeline.add_stage(
-            BuildAndPushStage(self, "BuildAndPushStage")
-        )
+        build_and_push_stage = BuildAndPushStage(self, "BuildAndPushStage")
+
+        pipeline.add_stage(build_and_push_stage)
+
+
