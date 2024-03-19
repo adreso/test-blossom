@@ -41,4 +41,3 @@ class BuildAndPushStage(Stage):
         super().__init__(scope, construct_id, **kwargs)
 
         self.build_and_push_stack = BuildAndPushStack(self, "BuildAndPushStack")
-        self.build_and_push_step = self.build_and_push_stack.build_and_push_step
