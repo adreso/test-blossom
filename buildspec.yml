@@ -15,15 +15,16 @@ phases:
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 874965955493.dkr.ecr.us-east-1.amazonaws.com
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=${COMMIT_HASH:=latest}
+      - echo $IMAGE_TAG
 
   build:
     commands:
       - ls
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker build -t 874965955493.dkr.ecr.us-east-1.amazonaws.com/udagram-api-feed:$IMAGE_TAG .
+      - docker build -t 874965955493.dkr.ecr.us-east-1.amazonaws.com/dev-ce2-blossom-ecr-ms-blossom-test:latest .
       - echo Tagging Docker Image ...
-      - docker push 874965955493.dkr.ecr.us-east-1.amazonaws.com/udagram-api-feed:$IMAGE_TAG
+      - docker push 874965955493.dkr.ecr.us-east-1.amazonaws.com/dev-ce2-blossom-ecr-ms-blossom-test:latest
 
 #  'echo Build started on `date`',
 #  './gradlew bootJar',
