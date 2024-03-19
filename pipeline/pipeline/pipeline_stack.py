@@ -45,11 +45,15 @@ class PipelineStack(Stack):
             synth=synth_step,
             self_mutation=True,
             code_pipeline=code_pipeline,
+
         )
 
         build_and_push_stage = BuildAndPushStage(self, "BuildAndPushStage")
 
         pipeline.add_stage(stage=build_and_push_stage)
+        var = build_and_push_stage.build_and_push_stack.build_and_push_step
+        print(var)
+
 
 
 

@@ -9,6 +9,7 @@ from aws_cdk.pipelines import (
     CodePipeline,
     ShellStep,
     CodePipelineSource,
+    CodeBuildStep
 )
 
 from constructs import Construct
