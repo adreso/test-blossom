@@ -16,5 +16,23 @@ phases:
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=${COMMIT_HASH:=latest}
 
+  build:
+    commands:
+      - ls
+      - echo Build started on `date`
+      - echo Building the Docker image...
+      - docker build -t 874965955493.dkr.ecr.us-east-1.amazonaws.com/udagram-api-feed:$IMAGE_TAG .
+      - echo Tagging Docker Image ...
+      - docker push 874965955493.dkr.ecr.us-east-1.amazonaws.com/udagram-api-feed:$IMAGE_TAG
+
+#  'echo Build started on `date`',
+#  './gradlew bootJar',
+#  'echo Building Docker Image $ECR_REPO:latest',
+#  'docker build -f docker/Dockerfile -t $ECR_REPO:latest .',
+#  'echo Tagging Docker Image $ECR_REPO:latest with $ECR_REPO:$IMAGE_TAG',
+#  'docker tag $ECR_REPO:latest $ECR_REPO:$IMAGE_TAG',
+#  'echo Pushing Docker Image to $ECR_REPO:latest and $ECR_REPO:$IMAGE_TAG',
+#  'docker push $ECR_REPO:latest',
+#  'docker push $ECR_REPO:$IMAGE_TAG'
 artifacts:
   files: '**/*'
