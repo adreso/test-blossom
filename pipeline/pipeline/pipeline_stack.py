@@ -1,15 +1,17 @@
 from aws_cdk import (
     Stack,
     aws_codepipeline as codepipeline,
-
+    aws_ecr as ecr,
+    Stage
 )
 from constructs import Construct
 from aws_cdk.pipelines import (
     CodePipeline,
     ShellStep,
-    CodePipelineSource
+    CodePipelineSource,
 )
 from aws_cdk.aws_codepipeline import PipelineType
+from .build_stage import BuildAndPushStage
 
 
 class PipelineStack(Stack):
@@ -43,4 +45,8 @@ class PipelineStack(Stack):
             synth=synth_step,
             self_mutation=True,
             code_pipeline=code_pipeline,
+        )
+
+        pipeline.add_stage(
+            BuildAndPushStage(self, "BuildAndPushStage")
         )
