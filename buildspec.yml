@@ -11,6 +11,7 @@ phases:
       - mvn clean
       - mvn install
       - docker ps
+      - aws ecr get-login --no-include-email
 
 artifacts:
   files: '**/*'
