@@ -1,5 +1,4 @@
-# Copyright 2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-# SPDX-License-Identifier: MIT-0
+
 version: 0.2
 
 phases:
@@ -11,6 +10,7 @@ phases:
     commands:
       - mvn clean
       - mvn install
+      - docker ps
 
 artifacts:
   files: '**/*'
