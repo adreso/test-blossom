@@ -15,5 +15,5 @@ COPY --from=builder application/spring-boot-loader/ ./
 RUN true
 COPY --from=builder application/application/ ./
 
-EXPOSE 8080
+EXPOSE 8081
 ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
