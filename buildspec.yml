@@ -6,6 +6,7 @@ phases:
       java: corretto17
 
   pre_build:
+
     commands:
       - mvn clean
       - mvn install
@@ -24,7 +25,7 @@ phases:
       - docker build -t 874965955493.dkr.ecr.us-east-1.amazonaws.com/dev-ce2-blossom-ecr-ms-blossom-test:latest .
       - echo Tagging Docker Image ...
       - docker push 874965955493.dkr.ecr.us-east-1.amazonaws.com/dev-ce2-blossom-ecr-ms-blossom-test:latest
-      - printf '[{"name":"dev-ce2-blossom-ecr-ms-blossom-test","imageUri":"874965955493.dkr.ecr.us-east-1.amazonaws.com/dev-ce2-blossom-ecr-ms-blossom-test:latest"}]' > imagedefinitions.json
+      - printf '[{"name":"dev-ce2-blossom-con-ms-blossom-test","imageUri":"874965955493.dkr.ecr.us-east-1.amazonaws.com/dev-ce2-blossom-ecr-ms-blossom-test:latest"}]' > imagedefinitions.json
 
 artifacts:
   files:
