@@ -18,7 +18,7 @@ public class AplicacionController {
 
     @GetMapping(value = "/ping")
     public ResponseEntity<Object> ping() {
-        return new ResponseEntity<>("pong2", HttpStatus.OK);
+        return new ResponseEntity<>("pong3", HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
