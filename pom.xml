@@ -8,7 +8,7 @@
         <version>3.0.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>co.com.dispapeles</groupId>
+    <groupId>co.com.blossom</groupId>
     <artifactId>blossom-app</artifactId>
     <version>1.0.0</version>
     <name>blossom-app</name>

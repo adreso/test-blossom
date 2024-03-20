@@ -1,11 +1,11 @@
-FROM amazoncorretto:17-alpine as builder
+FROM public.ecr.aws/a9c6e8c1/amazoncorretto:17-alpine as builder
 
 WORKDIR application
 ARG JAR_FILE=target/*.jar
 COPY ${JAR_FILE} ms-application.jar
 RUN java -Djarmode=layertools -jar ms-application.jar extract
 
-FROM amazoncorretto:17-alpine
+FROM public.ecr.aws/a9c6e8c1/amazoncorretto:17-alpine
 WORKDIR application
 COPY --from=builder application/dependencies/ ./
 RUN true
