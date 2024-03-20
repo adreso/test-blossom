@@ -3,6 +3,15 @@
 
 * [Used technology](#tech)
 * [Repository](#repo)
+* [Domain-based structure](#domain)
+* [Application YAML](#application-yaml)
+* [Dockerfile](#dockerfile)
+* [Buildspec file](#buildspec)
+* [Appspect file](#appspec) 
+* [Liquibase folder](#liquibase)
+* [SWAGGER Documentation](#swagger)
+* [AWS Infrastructure](#aws)
+* [Theoretical questions](#theoretical-questions)
 
 
 <a name="tech"></a>
@@ -27,6 +36,7 @@ Start the server
   ./mvnw spring-boot:run
 ```
 
+<a name="domain"></a>
 ## Domain-based structure
 
 The Driven Domain Design (DDD) approach is applied.
@@ -69,6 +79,7 @@ Project Structure
 ```
 The test structure is the same as the main structure, but the test classes are in the same package as the class to be tested.
 
+<a name="application-yaml"></a>
 ## Application YAML
 In the application YAML file we have all the configurations and environment properties for the application. And this is ubicated in the resources folder.
 
@@ -78,6 +89,7 @@ In the application YAML file we have all the configurations and environment prop
 ```
 For this file in particular we are using a configuration based in profiles, specifically to work with aws parameters store. To work with multiple environments we have to create a profile in the application.yml file and create a file with the same name of the profile and the properties that we want to override. For example, if we have a profile called dev, we only need to add that profile and create the parameter store environment variables in the aws console.
 
+<a name="dockerfile"></a>
 ## Dockerfile
 In this file we have the configuration to build the application in a docker container. This file is ubicated in the root of the project.
 ```bash
@@ -85,6 +97,7 @@ In this file we have the configuration to build the application in a docker cont
 ```
 For this file in particular we are using layers to optimize the build of the application, but there this still can be more optimized.
 
+<a name="buildspec"></a>
 ## Buildspec file
 In this file we have the configuration to build the application in AWS CodeBuild. This file is ubicated in the root of the project.
 
@@ -100,6 +113,7 @@ For this file in particular we are defining three phases: install, pre_build and
 For the tests in particular, we could have created a new phase called test and run the tests in that phase, but for this case we are running the tests in the pre_build phase, for simplicity.
 ``
 
+<a name="appspec"></a>
 ## Appspect file
 In this file we have the configuration to deploy the application in AWS ECS. This file is ubicated in the root of the project.
 
@@ -108,14 +122,17 @@ In this file we have the configuration to deploy the application in AWS ECS. Thi
 ```
 In this case we are only defining the task definition and the container name to deploy the application in AWS ECS. This can be more dynamic, but for this case we are using a static configuration.
 
+<a name="liquibase"></a>
 ## Liquibase folder
 In this folder we have the configuration to manage the database changes. This file is ubicated in the root of the project. More information about the structure of the liquibase folder can be found in the readme.md file in the liquibase folder.
 
-## SWAGGER
+<a name="swagger"></a>
+## SWAGGER Documentation
 This is the URL to access the swagger documentation of the application. This is a dynamic documentation that is generated from the application through the annotations in the rest controllers.
 
 [https://dev-ms-blossom-private.testfacte.com/blossom-app/swagger-ui/index.html#/](https://dev-ms-blossom-private.testfacte.com/blossom-app/swagger-ui/index.html#/)
 
+<a name="aws"></a>
 ## Diagrams
 In the diagrams folder we have the diagrams of the application. This file is ubicated in the root of the project.
 
@@ -154,10 +171,13 @@ In this task we define the container details with the ECR previously created and
 - We could think ahead, and separate the project into microservices and have an inventory microservice and another for ordering, for example
 
 #### _Some of the problems encountered while creating the application were:_
-- I only had a problem and was creating the CI CD, I had a lot of time without doing this, so I forgot to add some permissions to the CodeBuild to be able to push the image to the ECR among other permissions, I expend a lot of time figuring out what was wrong, because the output error don't give me much detail, but after a while I was able to solve it.
+- When creating the CI CD, I had a lot of time without doing this, so I forgot to add some permissions to the CodeBuild to be able to push the image to the ECR among other permissions, I expend a lot of time figuring out what was wrong, because the output error don't give me much detail, but after a while I was able to solve it.
 - Another difficulty I had was with the rules of the Load Balancer, I created the Load Balancer with a CDK previously created for me a time ago, so I create a rule to forward the traffic to the target group, I change the path in my application to add actuator for the health of the application and I only change the health check in the target group, but I forget to change the rule in the Load Balancer, so I expend a lot of time figuring out what was wrong, but after a while I was able to solve it.
+- I exceded the Docker quota to pull images when doing the CI/CD, so I just create a public ECR to push the **AmazonCorreto** image and pull it from there
 - In general, I don't have too much problem creating the application, maybe I miss some time to do more thing to demonstrate more of my skills and knowledge, like implementing X-Ray, but I think I did a good job.
 
+
+<a name="theoretical-questions"></a>
 ## Theoretical questions
 **Describe how and why you would implement the Repository design pattern in this application.**
 
