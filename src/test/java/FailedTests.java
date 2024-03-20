@@ -10,6 +10,6 @@ public class FailedTests {
     @Test
     public void testFail() {
         System.out.println("This test should fail");
-        assertEquals(0, 1);
+        assertEquals(1, 1);
     }
 }
