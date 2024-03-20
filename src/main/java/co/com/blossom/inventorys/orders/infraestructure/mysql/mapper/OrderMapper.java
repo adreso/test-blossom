@@ -26,7 +26,6 @@ public interface OrderMapper {
 
 	OrderDetailDTO mapDetailEntityToDetailDTO(OrderDetailEntity orderDetailEntity);
 
-	// @Mapping(target = "product", source = "product", qualifiedByName = "productEntity")
 	OrderDetailEntity mapDetailDTOToDetailEntity(OrderDetailDTO orderDetailDTO);
 
 	@Named("detailOrderEntity")
@@ -41,8 +40,4 @@ public interface OrderMapper {
 		return detail.stream().map(this::mapDetailEntityToDetailDTO).toList();
 	}
 
-//	@Named("productEntity")
-//	default ProductEntity getProductEntity(OrderDetailDTO orderDetailDTO) {
-//		return orderDetailDTO.getProduct();
-//	}
 }

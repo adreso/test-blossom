@@ -25,7 +25,7 @@ public class CustomConstraintMessage implements ConstraintFacade {
             message = messageSource.getMessage(parameterCode, null, "", Locale.getDefault());
 
             if(message.isEmpty()) {
-                log.warn("Constraint no controlado: " + constraintName);
+                log.warn("No controlled Constraint: " + constraintName);
             }
         }
 

@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.context.support.ResourceBundleMessageSource;
 
 /**
- * Define configuraciones que afectan transversalmente el microservicio
+ * Define configurations that affect the microservice transversally
  */
 @Configuration
 public class AppConfig {

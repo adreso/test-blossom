@@ -15,10 +15,10 @@ import java.util.Optional;
 public interface OrderRepository extends JpaRepository<OrderEntity, Integer> {
 
     @Query("select o " +
-        "from OrderEntity o " +
-        "join o.user u " +
-        "where u.userName = ?1 " +
-            "and o.dateOrder between ?2 and ?3 " +
-        "order by o.dateOrder desc")
+           "from OrderEntity o " +
+           "join o.user u " +
+           "where u.userName = ?1 " +
+           "and o.dateOrder between ?2 and ?3 " +
+           "order by o.dateOrder desc")
     Page<OrderEntity> findByFilter(String username, LocalDateTime dateFrom, LocalDateTime dateTo, Pageable pageable);
 }

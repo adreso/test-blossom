@@ -9,7 +9,7 @@ public abstract class AbstractRestController {
                 .exitoso(true)
                 .dato(result)
                 .mensaje("OK")
-                .titulo("Satisfactorio")
+                .titulo("Successful")
                 .codigo("")
                 .build();
     }

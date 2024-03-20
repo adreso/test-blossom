@@ -13,13 +13,8 @@ import java.util.Objects;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ProductMapper {
 
-	ProductDTO mapEntityToModel(ProductEntity productEntity);
-	ProductEntity mapModelToEntity(ProductDTO productDTO);
+    ProductDTO mapEntityToModel(ProductEntity productEntity);
 
-//	@Named("categoryName")
-//	default String getCategoryName(String value) {
-//		if (Objects.isNull(value)) return null;
-//		return ProductCategoryENUM.getByValue(value).name();
-//	}
+    ProductEntity mapModelToEntity(ProductDTO productDTO);
 
 }

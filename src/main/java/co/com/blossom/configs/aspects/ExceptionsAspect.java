@@ -82,7 +82,7 @@ public class ExceptionsAspect {
         errorDetail.errorMessage = Objects.nonNull(effectiveMessage) && !effectiveMessage.isEmpty() ? effectiveMessage :
             message.contains(EXPRESSION_FK) ? "The selected record is linked to one or more records" :
             message.contains(EXPRESSION_FK_PARENT_NOT_EXISTS) ? "The parent record does not exist for the requested operation" :
-            message.contains(EXPRESSION_UK) ? "A record exists similar to the one you are trying to create or update" :
+            message.contains(EXPRESSION_UK) ? "A similar record exists to the one you are trying to create or update" :
             "Error ConstraintViolation";
 
         errorDetail.errorCode = ErrorCode.INFRA_ENTITY_DBCONSTRAINT_FOUND;

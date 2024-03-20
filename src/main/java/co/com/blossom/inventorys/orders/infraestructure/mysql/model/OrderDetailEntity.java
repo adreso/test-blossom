@@ -22,18 +22,14 @@ import java.util.List;
 @Setter
 public class OrderDetailEntity extends BaseEntity {
 
-//	@ManyToOne
-//	@JoinColumn(name = "idfkorder")
-//	private OrderEntity order;
+    @ManyToOne
+    @JoinColumn(name = "idfkproduct")
+    @NotNull
+    private ProductEntity product;
 
-	@ManyToOne
-	@JoinColumn(name = "idfkproduct")
-	@NotNull
-	private ProductEntity product;
+    @NotNull
+    private BigDecimal quantity;
 
-	@NotNull
-	private BigDecimal quantity;
-
-	@NotNull
-	private BigDecimal price;
+    @NotNull
+    private BigDecimal price;
 }

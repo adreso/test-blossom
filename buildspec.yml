@@ -8,6 +8,7 @@ phases:
   pre_build:
     commands:
       - echo starting tests...
+      - mvn test
       - mvn install
 
   build:

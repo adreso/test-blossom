@@ -6,8 +6,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Anotación de ejemplo para identificar métodos que se deseen observar si detonan excepción
- * Lo requiere la clase ExceptionsAspect
+ * Example annotation to identify methods that are desired to be observed if they trigger an exception
+ * Required by the ExceptionsAspect class
  */
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
