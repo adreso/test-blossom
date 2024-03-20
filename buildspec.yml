@@ -4,14 +4,12 @@ phases:
   install:
     runtime-versions:
       java: corretto17
-    commands:
-      - mvn clean
-      - mvn install
 
   pre_build:
     commands:
       - echo starting tests...
       - mvn test
+      - mvn install
 
   build:
     commands:
