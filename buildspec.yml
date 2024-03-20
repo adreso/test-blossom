@@ -13,6 +13,7 @@ phases:
 
   build:
     commands:
+      - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/a9c6e8c1
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 874965955493.dkr.ecr.us-east-1.amazonaws.com
       - echo Build started on `date`
       - echo Building the Docker image...
