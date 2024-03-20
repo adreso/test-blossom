@@ -12,6 +12,7 @@
 * [SWAGGER Documentation](#swagger)
 * [AWS Infrastructure](#aws)
 * [Theoretical questions](#theoretical-questions)
+* [Evidences CI/CD deployment](#evidences-ci-cd-deployment)
 
 
 <a name="tech"></a>
@@ -194,3 +195,8 @@ Dependency injection is facilitated by spring through its Inversion of Control, 
 **Discuss the differences between JPA and Hibernate, and why you would choose one over  the other.**
 The main difference between JPA and Hibernate is that JPA is a specification that defines the management of relational data in Java applications, while Hibernate is an Object-Relational Mapping (ORM) framework that implements the JPA specification.
 So in general, I would choose Hibernate if I need advanced ORM features with a lot of flexibility and JPA if I need to be able to switch between different ORM frameworks or reduces the interactivity with the database.
+
+<a name="evidences-ci-cd-deployment"></a>
+## Evidences CI/CD deployment 
+<img src="pipeline.png" alt="pipeline"/>
+<img src="deployment.png" alt="deployment"/>
