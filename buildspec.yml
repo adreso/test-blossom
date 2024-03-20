@@ -27,4 +27,6 @@ phases:
       - printf '[{"name":"dev-ce2-blossom-ecr-ms-blossom-test","imageUri":"874965955493.dkr.ecr.us-east-1.amazonaws.com/dev-ce2-blossom-ecr-ms-blossom-test:latest"}]' > imagedefinitions.json
 
 artifacts:
-  files: imagedefinitions.json
+  files:
+    - imagedefinitions.json
+    - appspec.yml
