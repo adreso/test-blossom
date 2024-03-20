@@ -5,5 +5,5 @@ Resources:
       Properties:
         TaskDefinition: "arn:aws:ecs:us-east-1:874965955493:task-definition/dev-ce2-blossom-ecs-task-ms-blossom-test:1"
         LoadBalancerInfo:
-          ContainerName: "dev-ce2-blossom-ecs-ms-blossom-test"
+          ContainerName: "dev-ce2-blossom-con-ms-blossom-test"
           ContainerPort: 8081
