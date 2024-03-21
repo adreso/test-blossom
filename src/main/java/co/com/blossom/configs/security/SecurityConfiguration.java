@@ -5,7 +5,6 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -85,11 +84,12 @@ public class SecurityConfiguration {
         return new InMemoryClientRegistrationRepository(this.cognitoClientRegistration());
     }
 
-    private static final String USER_POOL_URI = "https://us-east-1_eX6tLJiC2.auth.us-east-1.amazoncognito.com";
-    private static final String AUTHORIZATION_URI = USER_POOL_URI + "/oauth2/authorize";
-    private static final String TOKEN_URI = USER_POOL_URI + "/oauth2/token";
-    private static final String USER_INFO_URI = USER_POOL_URI + "/oauth2/userInfo";
     private ClientRegistration cognitoClientRegistration() {
+        final String USER_POOL_URI = "https://" + environments.getAWSCognitoUserPoolId() + ".auth.us-east-1.amazoncognito.com";
+        final String AUTHORIZATION_URI = USER_POOL_URI + "/oauth2/authorize";
+        final String TOKEN_URI = USER_POOL_URI + "/oauth2/token";
+        final String USER_INFO_URI = USER_POOL_URI + "/oauth2/userInfo";
+
         return ClientRegistration.withRegistrationId("cognito")
             .clientId(environments.getAWSCognitoClientId())
             .clientSecret(environments.getAWSCognitoSecret())

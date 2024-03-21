@@ -3,6 +3,7 @@
 
 * [Used technology](#tech)
 * [Repository](#repo)
+* [Functionality of the application](#functionality)
 * [Domain-based structure](#domain)
 * [Application YAML](#application-yaml)
 * [Dockerfile](#dockerfile)
@@ -36,6 +37,19 @@ Start the server
 ```bash
   ./mvnw spring-boot:run
 ```
+
+<a name="functionality"></a>
+## Functionality of the application
+For time reasons the category products and brands products are the following:
+- Category products: 
+    - "CATEGORY_A"
+    - "CATEGORY_B"
+    - "CATEGORY_C"
+    - "CATEGORY_D"
+- Brand products:
+    - "BRAND_A"
+    - "BRAND_B"
+    - "BRAND_C"
 
 <a name="domain"></a>
 ## Domain-based structure
@@ -172,6 +186,7 @@ In this task we define the container details with the ECR previously created and
 - We could think ahead, and separate the project into microservices and have an inventory microservice and another for ordering, for example
 - The use of the Refresher token is not implemented, this is a good practice to have a more secure application, but for this case, we are using the token with a short expiration time, because time.
 - The lambda to add the role to the token was not implemented, I was an idea without time to implement it, but the idea was to have users with different roles and permissions, so the application could have different behaviors depending on the role of the user.
+- In the security part, we could have implemented the revocation of the token.
 
 #### _Some of the problems encountered while creating the application were:_
 - When creating the CI CD, I had a lot of time without doing this, so I forgot to add some permissions to the CodeBuild to be able to push the image to the ECR among other permissions, I expend a lot of time figuring out what was wrong, because the output error don't give me much detail, but after a while I was able to solve it.

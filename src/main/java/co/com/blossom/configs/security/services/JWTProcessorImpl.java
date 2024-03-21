@@ -1,77 +1,81 @@
 package co.com.blossom.configs.security.services;
 
+import co.com.blossom.configs.exceptions.InfraestructureException;
 import co.com.blossom.configs.security.model.TokenDetail;
-import com.google.gson.Gson;
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.beans.factory.annotation.Value;
+import co.com.blossom.configs.utils.EnvironmentProps;
+import co.com.blossom.configs.utils.ErrorCode;
+import com.auth0.jwk.Jwk;
+import com.auth0.jwk.JwkException;
+import com.auth0.jwk.JwkProvider;
+import com.auth0.jwk.UrlJwkProvider;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.RSAKeyProvider;
+import com.auth0.jwt.interfaces.Verification;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
+import java.security.interfaces.RSAPrivateKey;
+import java.security.interfaces.RSAPublicKey;
+import java.util.Locale;
 
 @Service
+@AllArgsConstructor
 public class JWTProcessorImpl implements JWTProcessor {
 
-    @Value("${security.lambda-arn:}")
-    private String functionName;
-
-    @Value("${cloud.aws.region.static:}")
-    private String region;
-
-    private final Gson gson = new Gson();
+    @NotNull
+    private final EnvironmentProps environmentProps;
+    @NotNull
+    private final MessageSource messageSource;
 
     @Override
     public TokenDetail deserializeToken(String token) {
-//        Payload payLoad = new Payload();
-//        payLoad.setToken(token);
-//
-//        String inputJSON = gson.toJson(payLoad);
-//
-//        InvokeRequest lmbRequest = new InvokeRequest()
-//                .withFunctionName(functionName)
-//                .withPayload(inputJSON);
-//
-//        lmbRequest.setInvocationType(InvocationType.RequestResponse);
-//
-//        AWSLambda lambda = AWSLambdaClientBuilder.standard().withRegion(region).build();
-//
-//        InvokeResult lmbResult = lambda.invoke(lmbRequest);
-//        String outputJSON = new String(lmbResult.getPayload().array(), StandardCharsets.UTF_8);
-//        ResponsePayload response = gson.fromJson(outputJSON, ResponsePayload.class);
-//
-//        if(response.isError()) {
-//            throw new RuntimeException(response.getMessage());
-//        }
 
         TokenDetail tokenDetail = TokenDetail.builder().build();
-        ResponsePayload response = new ResponsePayload();
-        response.setData(new Data());
-
-        if(response.getData().getRoles() != null && !response.getData().getRoles().isEmpty()) {
-            tokenDetail.setRoles(Arrays.asList(response.getData().getRoles().split(",")));
+        try {
+            validateToken(token);
+        } catch (JwkException e) {
+            throw new InfraestructureException(messageSource.getMessage("common.cognito.token.error",
+                new Object[]{e.getMessage()}, Locale.getDefault()), ErrorCode.DOMAIN_RESOURCE_DELETED);
         }
 
         return tokenDetail;
     }
 
-    @Setter
-    @Getter
-    private static class Payload {
-        private String token;
-        private String clientid;
-    }
+    private void validateToken(String token) throws JwkException {
+        String jwksUrl = "https://cognito-idp.us-east-1.amazonaws.com/" +
+            environmentProps.getAWSCognitoUserPoolId();
+        JwkProvider provider = new UrlJwkProvider(jwksUrl);
 
-    @Setter
-    @Getter
-    private static class ResponsePayload {
-        private boolean error;
-        private String message;
-        private Data data;
-    }
+        Jwk jwk = provider.get(environmentProps.getAWSCognitoKidValue());
+        RSAKeyProvider keyProvider = new RSAKeyProvider() {
+            @Override
+            public RSAPublicKey getPublicKeyById(String kid) {
+                try {
+                    return (RSAPublicKey) jwk.getPublicKey();
+                } catch (Exception e) {
+                    throw new RuntimeException("Error al obtener la clave pública", e);
+                }
+            }
 
-    @Setter
-    @Getter
-    private static class Data {
-        private String roles;
+            @Override
+            public RSAPrivateKey getPrivateKey() {
+                return null;
+            }
+
+            @Override
+            public String getPrivateKeyId() {
+                return null;
+            }
+        };
+
+        Algorithm algorithm = Algorithm.RSA256(keyProvider);
+        Verification verifier = JWT.require(algorithm);
+        JWTVerifier jwtVerifier = verifier.build();
+
+        jwtVerifier.verify(token);
     }
 }

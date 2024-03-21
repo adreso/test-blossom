@@ -33,6 +33,7 @@ cloud:
       user-pool-id: us-east-1_eX6tLJiC2
       client-id: 100q516ogijn5tpn3mmpfct2ia
       secret: td6uefj26d31elev5iqon02m3hk1i61q924j21sr6qo100plvq5
+      kid-value: EL5bW9YIGXunyNAO2BKyTZ17vK95r/Uo9SrR9QlHbyE=
 
 # OpenApi configuration
 springdoc:

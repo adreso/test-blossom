@@ -3,14 +3,13 @@ package co.com.blossom.configs.security;
 import co.com.blossom.configs.security.model.TokenDetail;
 import co.com.blossom.configs.security.model.UserSession;
 import co.com.blossom.configs.security.services.JWTProcessor;
+import co.com.blossom.configs.utils.EnvironmentProps;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -23,22 +22,19 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
 @Component
 @Slf4j
 public class JWTFilter extends OncePerRequestFilter {
-
     private RequestMatcher requestMatcherDirectAccess;
-    private RequestMatcher requestMatcherTroughUUIDSession;
     private final JWTProcessor jwtProcessor;
-    private final Environment env;
+    private final EnvironmentProps environmentProps;
 
-    public JWTFilter(Environment env, JWTProcessor jwtProcessor) {
-        String property = env.getProperty("security.allowed-uris");
+    public JWTFilter(EnvironmentProps environmentProps, JWTProcessor jwtProcessor) {
+        String property = environmentProps.getSecurityAllowedUris();
 
-        this.env = env;
+        this.environmentProps = environmentProps;
         this.jwtProcessor = jwtProcessor;
 
         if(property != null) {
@@ -113,24 +109,9 @@ public class JWTFilter extends OncePerRequestFilter {
     private boolean processAuthorization(HttpServletRequest request,
                                          HttpServletResponse response,
                                          UserSession userSession) {
-
         boolean hasAccess = true;
 
-//        String endPoint = request.getRequestURI()
-//                .replaceAll("/\\d+/", "/%param%/")
-//                .replaceAll("/\\d+", "/%param%");
-//
-//        if(userSession.getAuthorities() != null) {
-//            for(GrantedAuthority authority : userSession.getAuthorities()) {
-//                StringJoiner keyRedis = new StringJoiner(":");
-//                String access = "true";
-//
-//                if(access != null && !access.isEmpty()) {
-//                    hasAccess = true;
-//                    break;
-//                }
-//            }
-//        }
+        //TODO: Implement the logic to validate the user session and the url access
 
         if(!hasAccess) {
             log.error(userSession.getUsername() + " " + request.getRequestURI() + " " + HttpServletResponse.SC_FORBIDDEN);
@@ -156,24 +137,6 @@ public class JWTFilter extends OncePerRequestFilter {
      */
     private boolean validateRequestAllowedWithoutToken(HttpServletRequest request) {
         return Objects.nonNull(requestMatcherDirectAccess) && requestMatcherDirectAccess.matches(request);
-    }
-
-    /**
-     * Valida si la URI de la petición permite acceso sin un token, pero con un UUID de sesión
-     *
-     * @param key Identificador del cliente
-     * @param request Objeto con la información del request
-     * @return true si el URI permite acceso sin token y con uuid sesión, false en caso contrario
-     */
-    private boolean validateRequestAllowedTroughUUIDSession(String key, HttpServletRequest request) {
-        String property = env.getProperty("security.allowed-uris-" + key);
-        if(Objects.nonNull(property) && !property.isEmpty()) {
-            List<RequestMatcher> matchers = Arrays.stream(property.split(","))
-                .map(AntPathRequestMatcher::new).collect(Collectors.toList());
-
-            requestMatcherTroughUUIDSession = new OrRequestMatcher(matchers);
-        }
-        return Objects.nonNull(requestMatcherTroughUUIDSession) && requestMatcherTroughUUIDSession.matches(request);
     }
 
     /**

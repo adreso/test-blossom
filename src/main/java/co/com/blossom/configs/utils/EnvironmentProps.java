@@ -21,16 +21,20 @@ public class EnvironmentProps {
     public String getAWSCognitoSecret() {
         return env.getProperty("cloud.aws.cognito.secret");
     }
+    public String getAWSCognitoKidValue() {
+        return env.getProperty("cloud.aws.cognito.kid-value");
+    }
 
     public String getSecurityAllowedOrigins() {
         return env.getProperty("security.allowed-origins");
     }
-
     public String getSecurityAllowedMethods() {
         return env.getProperty("security.allowed-methods");
     }
-
     public String getSecurityAllowedHeaders() {
         return env.getProperty("security.allowed-headers");
+    }
+    public String getSecurityAllowedUris() {
+        return env.getProperty("security.allowed-uris");
     }
 }
