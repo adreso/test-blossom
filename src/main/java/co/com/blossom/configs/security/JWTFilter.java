@@ -84,13 +84,9 @@ public class JWTFilter extends OncePerRequestFilter {
                     authorizationHeader.substring(7));
 
             userSession = UserSession.builder()
-                    .username(tokenDetail.getNombreUsuario())
+                    .username(tokenDetail.getNameUser())
                     .build();
 
-            if (tokenDetail.getRoles() != null && !tokenDetail.getRoles().isEmpty()) {
-                userSession.setGrantedAuthorities(
-                        tokenDetail.getRoles().stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList()));
-            }
         } catch (RuntimeException ex) {
             createLogAnd401Response(request.getRequestURI(), ex.getMessage(), response);
         }
@@ -101,6 +97,7 @@ public class JWTFilter extends OncePerRequestFilter {
     /**
      * Processes the authorization for the request.
      * Reads the permissions configured in * the cache and validates if it can execute the action * *
+     *
      * @param request Object with the request information * @param response Object with the response information *
      * @return true if it can execute the request, false otherwise
      */

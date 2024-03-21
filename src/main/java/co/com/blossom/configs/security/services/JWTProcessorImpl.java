@@ -1,6 +1,7 @@
 package co.com.blossom.configs.security.services;
 
 import co.com.blossom.configs.exceptions.InfraestructureException;
+import co.com.blossom.configs.security.JWTUtils;
 import co.com.blossom.configs.security.model.TokenDetail;
 import co.com.blossom.configs.utils.EnvironmentProps;
 import co.com.blossom.configs.utils.ErrorCode;
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Service;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.util.Locale;
+import java.util.Map;
 
 @Service
 @AllArgsConstructor
@@ -37,6 +39,8 @@ public class JWTProcessorImpl implements JWTProcessor {
         TokenDetail tokenDetail = TokenDetail.builder().build();
         try {
             validateToken(token);
+            Map<String, Object> out = JWTUtils.decodeJWT(token);
+            tokenDetail.setNameUser((String) out.get("email"));
         } catch (JwkException e) {
             throw new InfraestructureException(messageSource.getMessage("common.cognito.token.error",
                 new Object[]{e.getMessage()}, Locale.getDefault()), ErrorCode.DOMAIN_RESOURCE_DELETED);

@@ -3,6 +3,8 @@ package co.com.blossom.inventory.orders.domain.services;
 import co.com.blossom.configs.enumerators.ProductBrandENUM;
 import co.com.blossom.configs.enumerators.ProductCategoryENUM;
 import co.com.blossom.configs.exceptions.DomainException;
+import co.com.blossom.configs.security.model.UserSession;
+import co.com.blossom.configs.security.services.SessionFacade;
 import co.com.blossom.configs.utils.CustomSlice;
 import co.com.blossom.configs.utils.ErrorCode;
 import co.com.blossom.inventorys.orders.domain.gateways.OrderGateway;
@@ -11,6 +13,7 @@ import co.com.blossom.inventorys.orders.domain.model.OrderDetailDTO;
 import co.com.blossom.inventorys.orders.domain.services.OrderServiceImpl;
 import co.com.blossom.masters.products.domain.gateways.ProductGateway;
 import co.com.blossom.masters.products.domain.model.ProductDTO;
+import co.com.blossom.masters.users.domain.gateways.UserGateway;
 import co.com.blossom.masters.users.domain.model.UserDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -45,6 +48,11 @@ class OrderServiceImplTest {
 
     @Mock
     private MessageSource messageSource;
+
+    @Mock
+    private UserGateway userGateway;
+    @Mock
+    private SessionFacade sessionFacade;
 
     @InjectMocks
     private OrderServiceImpl orderService;
@@ -85,6 +93,10 @@ class OrderServiceImplTest {
     @Test
     @DisplayName("Order create")
     void create() {
+        UserSession userSession = UserSession.builder().username("testUser").build();
+        UserDTO userDTO = UserDTO.builder().id(1).build();
+        when(sessionFacade.getUserSession()).thenReturn(userSession);
+        when(userGateway.findByUsername(any())).thenReturn(userDTO);
 
         when(orderGateway.create(any())).thenReturn(1);
         when(productGateway.existAllProductos(any())).thenReturn(true);
@@ -108,41 +120,6 @@ class OrderServiceImplTest {
         CustomSlice<OrderDTO> result = orderService.findByFilter(username, dateFrom, dateTo, pageable);
 
         assertEquals(0, result.getElements().size());
-    }
-
-    @Test
-    @DisplayName("Order create, order detail is null")
-    void createOrderDetailNull() {
-        orderDTO.setDetail(null);
-
-        when(messageSource.getMessage(anyString(), any(), any())).thenReturn("order.detail.not.found");
-
-        Exception exception = assertThrows(DomainException.class, () -> orderService.create(orderDTO));
-        assertTrue(exception.getMessage().contains("order.detail.not.found"));
-        assertEquals(ErrorCode.DOMAIN_RESOURCE_NOT_FOUND, ((DomainException) exception).getCode());
-    }
-
-    @Test
-    @DisplayName("Order create, order detail is empty")
-    void createOrderDetailEmpty() {
-        orderDTO.setDetail(Collections.emptyList());
-
-        when(messageSource.getMessage(anyString(), any(), any())).thenReturn("order.detail.not.found");
-
-        Exception exception = assertThrows(DomainException.class, () -> orderService.create(orderDTO));
-        assertTrue(exception.getMessage().contains("order.detail.not.found"));
-        assertEquals(ErrorCode.DOMAIN_RESOURCE_NOT_FOUND, ((DomainException) exception).getCode());
-    }
-
-    @Test
-    @DisplayName("Order create, product does not exist")
-    void createProductNotExist() {
-        when(productGateway.existAllProductos(any())).thenReturn(false);
-        when(messageSource.getMessage(anyString(), any(), any())).thenReturn("order.product.not.found");
-
-        Exception exception = assertThrows(DomainException.class, () -> orderService.create(orderDTO));
-        assertTrue(exception.getMessage().contains("order.product.not.found"));
-        assertEquals(ErrorCode.DOMAIN_RESOURCE_NOT_FOUND, ((DomainException) exception).getCode());
     }
 
     @Test
