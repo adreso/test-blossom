@@ -8,10 +8,10 @@ import org.springframework.data.domain.Page;
 import java.util.List;
 
 /**
- * Clase que ofrece los atributos básicos que se devuelven en
- * funcionalidades que requieren paginación
+ * Class that provides the basic attributes that are returned in
+ * functionalities that require pagination
  *
- * @param <T> Tipo de dato que encapsula la paginación
+ * @param <T> Type of data that encapsulates the pagination
  */
 @Setter
 @Getter

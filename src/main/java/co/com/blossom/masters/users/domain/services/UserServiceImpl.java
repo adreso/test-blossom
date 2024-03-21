@@ -1,5 +1,7 @@
 package co.com.blossom.masters.users.domain.services;
 
+import co.com.blossom.auth.appuser.domain.gateways.AppUserGateway;
+import co.com.blossom.auth.appuser.domain.model.AppUserDTO;
 import co.com.blossom.configs.utils.ErrorCode;
 import co.com.blossom.configs.exceptions.DomainException;
 import co.com.blossom.masters.users.domain.gateways.UserGateway;
@@ -20,6 +22,7 @@ public class UserServiceImpl implements UserService {
 
 	private final UserGateway gateway;
 	private final MessageSource messageSource;
+	private final AppUserGateway appUserGateway;
 
 	@Override
 	@Transactional
@@ -31,9 +34,13 @@ public class UserServiceImpl implements UserService {
 					new Object[] {userDTO.getUserName()}, Locale.getDefault()), ErrorCode.DOMAIN_RESOURCE_DUPLICATE);
 		}
 
-		UserDTO userCrete = gateway.createUser(userDTO);
+		UserDTO userCreate = gateway.createUser(userDTO);
+		appUserGateway.signUp(AppUserDTO.builder()
+			.username(userDTO.getUserName())
+			.password(userDTO.getPassword())
+			.build());
 
-		return userCrete;
+		return userCreate;
 	}
 
 }

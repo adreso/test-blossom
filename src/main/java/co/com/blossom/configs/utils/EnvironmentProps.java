@@ -12,4 +12,25 @@ public class EnvironmentProps {
     public String getAWSRegion() {
         return env.getProperty("cloud.aws.region.static");
     }
+    public String getAWSCognitoUserPoolId() {
+        return env.getProperty("cloud.aws.cognito.user-pool-id");
+    }
+    public String getAWSCognitoClientId() {
+        return env.getProperty("cloud.aws.cognito.client-id");
+    }
+    public String getAWSCognitoSecret() {
+        return env.getProperty("cloud.aws.cognito.secret");
+    }
+
+    public String getSecurityAllowedOrigins() {
+        return env.getProperty("security.allowed-origins");
+    }
+
+    public String getSecurityAllowedMethods() {
+        return env.getProperty("security.allowed-methods");
+    }
+
+    public String getSecurityAllowedHeaders() {
+        return env.getProperty("security.allowed-headers");
+    }
 }

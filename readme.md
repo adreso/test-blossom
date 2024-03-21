@@ -166,10 +166,12 @@ In this task we define the container details with the ECR previously created and
 13. Deploy Stage: In this part of the process we are using CodeDeploy, this get the artifact generated for the CodeBuild and with this information and the configured ECS with its tasks, target group, load balancer, etc. this have the enough information to deploy to upload the task definition and update the service to run new task with the new docker image
 
 #### _There are several things we could have done to improve this process, but due to time and speed, they may not have been accomplished, which I will mention below:_
-- We could have used a system Cache like Redis to store the Token and repeated requests to improve the user experience.
+- I could have used a system Cache like Redis to store the Token and repeated requests to improve the user experience.
 - In the implementation of all infrastructure like the Load Balancer, ECR, Services and Task and part of the CI CD I use the CDK with Python to create these resources, but there is some configuration in the CI CD I make manually, directly from the console to speed up the development process, with enough time we could have all the infrastructure as code, and we could use this to be able to use in the future in other projects.
 - In the ECS services there is not autoscaling implementation, this is an easy one, but I consider this is not important in this case taking into account there is no load tests to check out the performance of the application.
 - We could think ahead, and separate the project into microservices and have an inventory microservice and another for ordering, for example
+- The use of the Refresher token is not implemented, this is a good practice to have a more secure application, but for this case, we are using the token with a short expiration time, because time.
+- The lambda to add the role to the token was not implemented, I was an idea without time to implement it, but the idea was to have users with different roles and permissions, so the application could have different behaviors depending on the role of the user.
 
 #### _Some of the problems encountered while creating the application were:_
 - When creating the CI CD, I had a lot of time without doing this, so I forgot to add some permissions to the CodeBuild to be able to push the image to the ECR among other permissions, I expend a lot of time figuring out what was wrong, because the output error don't give me much detail, but after a while I was able to solve it.

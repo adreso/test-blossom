@@ -4,8 +4,6 @@ import co.com.blossom.inventorys.orders.domain.model.OrderDTO;
 import co.com.blossom.inventorys.orders.domain.model.OrderDetailDTO;
 import co.com.blossom.inventorys.orders.infraestructure.mysql.model.OrderDetailEntity;
 import co.com.blossom.inventorys.orders.infraestructure.mysql.model.OrderEntity;
-import co.com.blossom.masters.products.infraestructure.mysql.model.ProductEntity;
-import co.com.blossom.masters.users.infraestructure.mysql.model.UserEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
@@ -17,7 +15,6 @@ import java.util.Objects;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface OrderMapper {
 
-
 	@Mapping(target = "detail", source = "detail", qualifiedByName = "detailOrderDTO")
 	OrderDTO mapEntityToModel(OrderEntity orderEntity);
 
@@ -26,6 +23,7 @@ public interface OrderMapper {
 
 	OrderDetailDTO mapDetailEntityToDetailDTO(OrderDetailEntity orderDetailEntity);
 
+	// @Mapping(target = "product", source = "product", qualifiedByName = "productEntity")
 	OrderDetailEntity mapDetailDTOToDetailEntity(OrderDetailDTO orderDetailDTO);
 
 	@Named("detailOrderEntity")
@@ -40,4 +38,8 @@ public interface OrderMapper {
 		return detail.stream().map(this::mapDetailEntityToDetailDTO).toList();
 	}
 
+//	@Named("productEntity")
+//	default ProductEntity getProductEntity(OrderDetailDTO orderDetailDTO) {
+//		return orderDetailDTO.getProduct();
+//	}
 }

@@ -3,6 +3,7 @@ package co.com.blossom.configs.utils;
 public final class ErrorCode {
     //Infraestructure code
     public static final String INFRA_ENTITY_NOT_FOUND = "IE1000";
+    public static final String INFRA_RESOURCE_VIOLATED_CONDITION = "IE1010";
     public static final String INFRA_ENTITY_DBCONSTRAINT_FOUND = "IE1100";
     //Domain code
     public static final String DOMAIN_RESOURCE_NOT_FOUND = "DE1000";
