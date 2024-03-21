@@ -1,4 +1,4 @@
-package co.com.blossom.inventory.domain.services;
+package blossom.com.co.inventory.domain.services;
 
 import co.com.blossom.configs.enumerators.ProductBrandENUM;
 import co.com.blossom.configs.enumerators.ProductCategoryENUM;

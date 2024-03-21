@@ -1,9 +1,10 @@
-package co.com.blossom.masters.users.domain.services;
+package blossom.com.co.masters.users.domain.services;
 
 import co.com.blossom.configs.exceptions.DomainException;
 import co.com.blossom.configs.utils.ErrorCode;
 import co.com.blossom.masters.users.domain.gateways.UserGateway;
 import co.com.blossom.masters.users.domain.model.UserDTO;
+import co.com.blossom.masters.users.domain.services.UserServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

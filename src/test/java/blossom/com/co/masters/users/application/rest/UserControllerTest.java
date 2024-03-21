@@ -1,5 +1,6 @@
-package co.com.blossom.masters.users.application.rest;
+package blossom.com.co.masters.users.application.rest;
 
+import co.com.blossom.masters.users.application.rest.UserController;
 import co.com.blossom.masters.users.domain.model.UserDTO;
 import co.com.blossom.masters.users.domain.services.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;

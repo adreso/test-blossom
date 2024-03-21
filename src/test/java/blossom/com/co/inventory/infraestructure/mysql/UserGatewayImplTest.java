@@ -1,7 +1,8 @@
-package co.com.blossom.masters.users.infraestructure.mysql;
+package blossom.com.co.inventory.infraestructure.mysql;
 
 import co.com.blossom.configs.enumerators.RoleENUM;
 import co.com.blossom.masters.users.domain.model.UserDTO;
+import co.com.blossom.masters.users.infraestructure.mysql.UserRepository;
 import co.com.blossom.masters.users.infraestructure.mysql.gateway.UserGatewayImpl;
 import co.com.blossom.masters.users.infraestructure.mysql.mapper.UserMapper;
 import co.com.blossom.masters.users.infraestructure.mysql.model.UserEntity;

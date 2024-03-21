@@ -1,4 +1,4 @@
-package co.com.blossom.inventory.infraestructure.mysql;
+package blossom.com.co.masters.users.infraestructure.mysql;
 
 import co.com.blossom.configs.enumerators.RoleENUM;
 import co.com.blossom.masters.users.domain.model.UserDTO;

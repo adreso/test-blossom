@@ -1,4 +1,4 @@
-package co.com.blossom.inventory.application.rest;
+package blossom.com.co.inventory.application.rest;
 
 import co.com.blossom.configs.enumerators.ProductBrandENUM;
 import co.com.blossom.configs.enumerators.ProductCategoryENUM;
