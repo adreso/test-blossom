@@ -22,10 +22,6 @@ import java.util.List;
 @Setter
 public class OrderDetailEntity extends BaseEntity {
 
-//	@ManyToOne
-//	@JoinColumn(name = "idfkorder")
-//	private OrderEntity order;
-
 	@ManyToOne
 	@JoinColumn(name = "idfkproduct")
 	@NotNull

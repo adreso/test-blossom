@@ -37,7 +37,7 @@ public class JWTFilter extends OncePerRequestFilter {
         this.environmentProps = environmentProps;
         this.jwtProcessor = jwtProcessor;
 
-        if(property != null) {
+        if (property != null) {
             List<RequestMatcher> matchers = Arrays.stream(property.split(","))
                     .map(AntPathRequestMatcher::new).collect(Collectors.toList());
 
@@ -52,7 +52,7 @@ public class JWTFilter extends OncePerRequestFilter {
 
         String authorizationHeader = request.getHeader("Authorization");
 
-        if(validateRequestAllowedWithoutToken(request)) {
+        if (validateRequestAllowedWithoutToken(request)) {
             filterChain.doFilter(request, response);
             return;
         }
@@ -65,7 +65,7 @@ public class JWTFilter extends OncePerRequestFilter {
 
         UserSession userSession = processAuthentication(request, response, authorizationHeader);
 
-        if(userSession != null && processAuthorization(request, response, userSession)) {
+        if (userSession != null && processAuthorization(request, response, userSession)) {
             UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
                     userSession, null, null);
 
@@ -87,11 +87,11 @@ public class JWTFilter extends OncePerRequestFilter {
                     .username(tokenDetail.getNombreUsuario())
                     .build();
 
-            if(tokenDetail.getRoles() != null && !tokenDetail.getRoles().isEmpty()) {
+            if (tokenDetail.getRoles() != null && !tokenDetail.getRoles().isEmpty()) {
                 userSession.setGrantedAuthorities(
                         tokenDetail.getRoles().stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList()));
             }
-        }catch (RuntimeException ex) {
+        } catch (RuntimeException ex) {
             createLogAnd401Response(request.getRequestURI(), ex.getMessage(), response);
         }
 
@@ -99,12 +99,10 @@ public class JWTFilter extends OncePerRequestFilter {
     }
 
     /**
-     * Procesa la autorización para la petición. Lee los permisos configurados en
-     * el caché y valida si puede ejecutar la acción
-     *
-     * @param request Objeto con la información de la petición
-     * @param response Objeto con la información de la respuesta
-     * @return true si puede ejecutar la petición, false en caso contrario
+     * Processes the authorization for the request.
+     * Reads the permissions configured in * the cache and validates if it can execute the action * *
+     * @param request Object with the request information * @param response Object with the response information *
+     * @return true if it can execute the request, false otherwise
      */
     private boolean processAuthorization(HttpServletRequest request,
                                          HttpServletResponse response,
@@ -113,7 +111,7 @@ public class JWTFilter extends OncePerRequestFilter {
 
         //TODO: Implement the logic to validate the user session and the url access
 
-        if(!hasAccess) {
+        if (!hasAccess) {
             log.error(userSession.getUsername() + " " + request.getRequestURI() + " " + HttpServletResponse.SC_FORBIDDEN);
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             return false;
@@ -130,27 +128,27 @@ public class JWTFilter extends OncePerRequestFilter {
     }
 
     /**
-     * Valida si la URI de la petición permite acceso sin un token
+     * Validates if the URI of the request allows access without a token
      *
-     * @param request Objeto con la información del request
-     * @return true si el URI permite acceso sin token, false en caso contrario
+     * @param request Object with the request information
+     * @return true if the URI allows access without a token, false otherwise
      */
     private boolean validateRequestAllowedWithoutToken(HttpServletRequest request) {
         return Objects.nonNull(requestMatcherDirectAccess) && requestMatcherDirectAccess.matches(request);
     }
 
     /**
-     * Verificar si el UUID de sesión existe en el caché
+     * Verify if the session UUID exists in the cache
      * @param uuidsession
-     * @return true si el UUID de sesión existe, false en caso contrario
+     * @return true if the session UUID exists, false otherwise
      */
 
     /**
-     * Crea el log y configura el response para que entregue un código status 401
+     * Creates the log and configures the response to deliver a status code 401
      *
-     * @param uri URI a la cual se hizo la petición
-     * @param logMessage Mensaje a registrar en el log
-     * @param response Objeto con la información del response
+     * @param uri        URI to which the request was made
+     * @param logMessage Message to be recorded in the log
+     * @param response   Object with the response information
      */
     private void createLogAnd401Response(String uri, String logMessage,
                                          HttpServletResponse response) {

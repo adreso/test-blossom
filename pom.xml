@@ -34,7 +34,6 @@
     </properties>
 
     <dependencies>
-        <!--   DEPENDENCIAS SPRING BOOT     -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
