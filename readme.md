@@ -153,7 +153,7 @@ In this task we define the container details with the ECR previously created and
 5. **RDS**: We created a schema named TESTS to work for this project, this is using aurora.
 6. **Cloudwatch**: The output of the logs were configured in the task definition.
 7. **Route 53**: The subdomain dev-ms-blossom-private was created with a domain previously created with Route 53 and is attached to the DNS Load Balanacer.
-8. **Cognito**: The authentication part with JWT were integrated with Cognito, Congnito in this case handle all the part of the users, the authentication, and authorization, all this generating a token with all the enough claims to work.
+8. **Cognito**: The authentication part with JWT were integrated with Cognito, Congnito in this case handle all the part of the users, the authentication, and authorization, all this generating a token with all the enough claims to work. Using Cognito we register the user, this send a code to the email to confirm the user, and then the user can log in with the email and password.
 9. **Lambda**: In this case the lambda is triggered for Cognito when the user is checked, so at the moment when the token is about to be created this add some additional claims like in this case the role, to be used for the application.
 10. **Pipeline**: This contains all the logic for the CI CD
 11. **Source Stage**: This stage connects to GitHub through a token Authorization configured in the GitHub account, this trigger the pipeline in this case when the User push to the Main.
