@@ -1,0 +1,355 @@
+{
+	"info": {
+		"_postman_id": "dc44fe31-9f64-4e8b-8842-9b3e8400160e",
+		"name": "Blossom",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5997170"
+	},
+	"item": [
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJraWQiOiJFTDViVzlZSUdYdW55TkFPMkJLeVRaMTd2Szk1clwvVW85U3JSOVFsSGJ5RT0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI3NzUyYjliMi1hODBkLTRlMTAtODFhYS1iN2U0MmFiNmZhNWEiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiaXNzIjoiaHR0cHM6XC9cL2NvZ25pdG8taWRwLnVzLWVhc3QtMS5hbWF6b25hd3MuY29tXC91cy1lYXN0LTFfZVg2dExKaUMyIiwiY29nbml0bzp1c2VybmFtZSI6Ijc3NTJiOWIyLWE4MGQtNGUxMC04MWFhLWI3ZTQyYWI2ZmE1YSIsIm9yaWdpbl9qdGkiOiI3YjUxMTU4My0zMTY3LTQ4OTktODgzZS04ODc1ZTQ0MTY0YzMiLCJhdWQiOiIxMDBxNTE2b2dpam41dHBuM21tcGZjdDJpYSIsImV2ZW50X2lkIjoiMmU2NDhmNGEtMDdlMy00NDY1LTkyMWEtYzQ4ODJmNjljNTRkIiwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE3MTA5ODMzNDYsImV4cCI6MTcxMDk4Njk0NSwiaWF0IjoxNzEwOTgzMzQ2LCJqdGkiOiJlYWM4YTEyZS0xZjIyLTQ1NjAtOGE5Ny01ODI4YzgwZDA5MzEiLCJlbWFpbCI6Im1hdXJpY2lvLm1hbmphcnJlc0Bob3RtYWlsLmNvbSJ9.ZFF5hIwck8bueOSZgCJvJRRamIODjf6ijJ7IlVS0B7v5KYz_NmQrf8xyLZsi3J3IPwCjWltz8dQsCCVBCNbOCGo-PyJGmOdbJhqDH6gHok8I9wI1Jr_rUW7h0UI852nOMeO85oDFAomxipcjXGPSdgUNU5Y12HOAOBYi9zmeX9RDVO4DsoJuq2Ezl97mbDh_-5kj8oZTCWBrdZP8BlyrKvb8rs70JtjD6QauzPhyzAO_5mc6Pzs8x-WUs_xYcCUU87j6nqn8RHufDy37Oqip-kS6-iMTUK3yk8YdtmwzVWyDwtu11e6HPclvVbtRuMPvKBvdF4N93vZhbJF04lgNPw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\": \"BBBS\",\r\n    \"name\": \"Product BBB\",\r\n    \"category\": \"CATEGORY_B\",\r\n    \"brand\": \"BRAND_B\",\r\n    \"price\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://dev-ms-blossom-private.testfacte.com/blossom-app/v1/products",
+							"protocol": "https",
+							"host": [
+								"dev-ms-blossom-private",
+								"testfacte",
+								"com"
+							],
+							"path": [
+								"blossom-app",
+								"v1",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://dev-ms-blossom-private.testfacte.com/blossom-app/v1/products/2",
+							"protocol": "https",
+							"host": [
+								"dev-ms-blossom-private",
+								"testfacte",
+								"com"
+							],
+							"path": [
+								"blossom-app",
+								"v1",
+								"products",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://dev-ms-blossom-private.testfacte.com/blossom-app/v1/products/list?minorPrice=10&majorPrice=&size=1&page=1",
+							"protocol": "https",
+							"host": [
+								"dev-ms-blossom-private",
+								"testfacte",
+								"com"
+							],
+							"path": [
+								"blossom-app",
+								"v1",
+								"products",
+								"list"
+							],
+							"query": [
+								{
+									"key": "minorPrice",
+									"value": "10"
+								},
+								{
+									"key": "majorPrice",
+									"value": ""
+								},
+								{
+									"key": "size",
+									"value": "1"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\": \"BBB\",\r\n    \"name\": \"Product BBB\",\r\n    \"category\": \"CATEGORY_B\",\r\n    \"brand\": \"BRAND_B\",\r\n    \"price\": 9.9,\r\n    \"active\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://dev-ms-blossom-private.testfacte.com/blossom-app/v1/products/1",
+							"protocol": "https",
+							"host": [
+								"dev-ms-blossom-private",
+								"testfacte",
+								"com"
+							],
+							"path": [
+								"blossom-app",
+								"v1",
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://dev-ms-blossom-private.testfacte.com/blossom-app/v1/products/1",
+							"protocol": "https",
+							"host": [
+								"dev-ms-blossom-private",
+								"testfacte",
+								"com"
+							],
+							"path": [
+								"blossom-app",
+								"v1",
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Registration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\":\"arrieta11andres@gmail.com\",\r\n    \"firstName\": \"Andrés\",\r\n    \"lastName\": \"Arrieta\",\r\n    \"password\": \"010190Andre$$\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://dev-ms-blossom-private.testfacte.com/blossom-app/v1/users",
+							"protocol": "https",
+							"host": [
+								"dev-ms-blossom-private",
+								"testfacte",
+								"com"
+							],
+							"path": [
+								"blossom-app",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"detail\":[\r\n        {\r\n            \"product\":  {\"id\": 1},\r\n            \"quantity\": 1.0,\r\n            \"price\": 10\r\n        },{\r\n            \"product\":  {\"id\": 2},\r\n            \"quantity\": 2.0,\r\n            \"price\": 5\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://dev-ms-blossom-private.testfacte.com/blossom-app/v1/orders",
+							"protocol": "https",
+							"host": [
+								"dev-ms-blossom-private",
+								"testfacte",
+								"com"
+							],
+							"path": [
+								"blossom-app",
+								"v1",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "History",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJraWQiOiJFTDViVzlZSUdYdW55TkFPMkJLeVRaMTd2Szk1clwvVW85U3JSOVFsSGJ5RT0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIzMjE0ZmRmYi05NDM0LTQ2NjMtOGY4Mi02NGQ2MmQ4NjcwMGEiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiaXNzIjoiaHR0cHM6XC9cL2NvZ25pdG8taWRwLnVzLWVhc3QtMS5hbWF6b25hd3MuY29tXC91cy1lYXN0LTFfZVg2dExKaUMyIiwiY29nbml0bzp1c2VybmFtZSI6IjMyMTRmZGZiLTk0MzQtNDY2My04ZjgyLTY0ZDYyZDg2NzAwYSIsIm9yaWdpbl9qdGkiOiJhNjViYzhlYy1iZWFiLTQxNmQtODUyZi1hOTE4ZThjYjY3NGQiLCJhdWQiOiIxMDBxNTE2b2dpam41dHBuM21tcGZjdDJpYSIsImV2ZW50X2lkIjoiMmJlNjc4M2QtMDBkNS00NzNjLTg3NDAtNWNmZGJiMGJjYjUwIiwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE3MTA5OTAyMDQsImV4cCI6MTcxMDk5MTEwNCwiaWF0IjoxNzEwOTkwMjA0LCJqdGkiOiI2Nzc4MmQyMC0xOTA1LTQ2MTUtYmYwOS05NzFmM2M3YmQxNzciLCJlbWFpbCI6ImFycmlldGExMWFuZHJlc0BnbWFpbC5jb20ifQ.c56KoxklEYhPTqcnm1ym-e0xtaqcz6vfd5E4TNRVbxTICon8jGIoPi2kiw74np62uxA8kjJez-PQLdYKfkrVDjWrT7A-kfxpH2s58FsayQB8R45Q4O_TDtckD2THKXcbkZRzRuX1tay2uSNaN1GRQ20dmBcFzI7lb_yhj98VxuDoyQsyvyAS9SiWjpLuPmKk3kee-Ogy78D2P7hbT8q4Hncu1EiMqlhUuuYKvzTuDcuMKt7WVH_a3x_U_bfTtZye9EwIwp2PHOvxrlO86CgaM3YaGEftWKwBcGMC1356k8an_b5Y7u7EU1DX-dmm9Le30Xmd9XW_wB7sYBkhMZKvPg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://dev-ms-blossom-private.testfacte.com/blossom-app/v1/orders/history?username=admin@blossom.com",
+							"protocol": "https",
+							"host": [
+								"dev-ms-blossom-private",
+								"testfacte",
+								"com"
+							],
+							"path": [
+								"blossom-app",
+								"v1",
+								"orders",
+								"history"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "admin@blossom.com"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "SignIn",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"arrieta11andres@gmail.com\",\r\n    \"password\":\"010190Andre$$\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://dev-ms-blossom-private.testfacte.com/blossom-app/v1/auth/sign-in",
+							"protocol": "https",
+							"host": [
+								"dev-ms-blossom-private",
+								"testfacte",
+								"com"
+							],
+							"path": [
+								"blossom-app",
+								"v1",
+								"auth",
+								"sign-in"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ConfirmAccount",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"arrieta11andres@gmail.com\",\r\n    \"code\":\"405152\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://dev-ms-blossom-private.testfacte.com/blossom-app/v1/auth/confirm-account",
+							"protocol": "https",
+							"host": [
+								"dev-ms-blossom-private",
+								"testfacte",
+								"com"
+							],
+							"path": [
+								"blossom-app",
+								"v1",
+								"auth",
+								"confirm-account"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

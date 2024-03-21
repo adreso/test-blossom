@@ -13,7 +13,8 @@
 * [SWAGGER Documentation](#swagger)
 * [AWS Infrastructure](#aws)
 * [Theoretical questions](#theoretical-questions)
-* [Evidences CI/CD deployment](#evidences-ci-cd-deployment)
+* [Evidences CI/CD deployment and functionality](#evidences-ci-cd-deployment)
+* [Postman Collection](#postman-collection)
 
 
 <a name="tech"></a>
@@ -217,3 +218,51 @@ So in general, I would choose Hibernate if I need advanced ORM features with a l
 ## Evidences CI/CD deployment 
 <img src="pipeline.png" alt="pipeline"/>
 <img src="deployment.png" alt="deployment"/>
+
+### This is the evidence of the Tests
+<img src="tests.png" alt="tests"/>
+
+### This is the endpoint to register a user
+<img src="postman_img/registration.png" alt="register"/>
+And this is the user without confirmation
+<img src="postman_img/user_no_confirmed.png" alt="user_not_confirmed"/>
+And this is the code received in the email
+<img src="postman_img/code.png" alt="code"/>
+
+### This is the endpoint to confirm the user
+<img src="postman_img/confirmed_user.png" alt="confirm"/>
+And this is in cognito the user confirmed
+<img src="postman_img/user_confirmed.png" alt="cognito_user_confirmed"/>
+
+### This is the endpoint to login
+<img src="postman_img/login.png" alt="login"/>
+
+### this is and unauthorized user
+<img src="postman_img/unauthorized.png" alt="unauthorized"/>
+
+### this is the endpoint to create the products
+<img src="postman_img/create_products.png" alt="create_product"/>
+
+### get an specific product
+<img src="postman_img/get_product.png" alt="get_product"/>
+
+### List products, we can filter for any field listed in the example
+<img src="postman_img/list_products.png" alt="list_products"/>
+
+### Update a product
+<img src="postman_img/update_product.png" alt="update_product"/>
+
+### Delete a product
+<img src="postman_img/delete_product.png" alt="delete_product"/>
+
+### Create order
+<img src="postman_img/create_order.png" alt="create_order"/>
+
+### History of orders
+<img src="postman_img/history_orders.png" alt="history_orders"/>
+
+<a name="postman-collection"></a>
+## Postman Collection
+```bash
+  ├── Blossom.postman_collection.json
+```
